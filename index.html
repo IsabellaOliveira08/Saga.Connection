@@ -406,18 +406,100 @@
       if (senha === senhaCorreta) {
         const container = document.querySelector('.container');
 
-        // Remove todos os elementos da tela (círculos, logo e menu)
+        // Limpa tela
         const elementos = container.querySelectorAll('.circle, .logo, #menu');
         elementos.forEach(el => el.remove());
+        container.innerHTML = '';
+        container.style.background = 'linear-gradient(to bottom right, #f0f4ff, #d0e3ff)';
 
-        // Muda o fundo para cor lisa
-        container.style.backgroundImage = 'none';
-        container.style.backgroundColor = '#f0f0f0';
+        // Cria painel do professor
+        const painel = document.createElement('div');
+        painel.style.display = 'flex';
+        painel.style.flexDirection = 'column';
+        painel.style.alignItems = 'center';
+        painel.style.justifyContent = 'center';
+        painel.style.height = '100vh';
+        painel.style.fontFamily = '"Comic Sans MS", cursive';
+        painel.style.color = '#333';
+        painel.style.textAlign = 'center';
+        painel.style.padding = '30px';
+
+        painel.innerHTML = `
+          <h1 style="font-size: 2.5em; margin-bottom: 10px;">👩‍🏫 Bem-vindo(a), Professor(a)!</h1>
+          <p style="font-size: 1.3em; margin-bottom: 30px;">Gerencie atividades e envie conteúdos para seus alunos.</p>
+        `;
+
+        // Botão - Enviar Arquivo
+        const inputArquivo = document.createElement('input');
+        inputArquivo.type = 'file';
+        inputArquivo.id = 'uploadArquivo';
+        inputArquivo.accept = '.pdf,.docx,.jpg,.png';
+        inputArquivo.style.marginBottom = '10px';
+
+        const botaoUpload = document.createElement('button');
+        botaoUpload.innerText = '📤 Enviar Arquivo';
+        botaoUpload.onclick = () => {
+          const arquivo = inputArquivo.files[0];
+          if (arquivo) {
+            alert(`Arquivo "${arquivo.name}" enviado com sucesso!`);
+          } else {
+            alert('Nenhum arquivo selecionado.');
+          }
+        };
+        estilizarBotao(botaoUpload);
+
+        // Área de Mensagem
+        const textarea = document.createElement('textarea');
+        textarea.placeholder = "Escreva uma mensagem para os alunos...";
+        textarea.rows = 4;
+        textarea.cols = 40;
+        textarea.style.margin = '20px 0';
+        textarea.style.borderRadius = '10px';
+        textarea.style.padding = '10px';
+        textarea.style.fontSize = '16px';
+
+        const botaoMensagem = document.createElement('button');
+        botaoMensagem.innerText = '💬 Salvar Mensagem';
+        botaoMensagem.onclick = () => {
+          alert("Mensagem salva: " + textarea.value);
+        };
+        estilizarBotao(botaoMensagem);
+
+        // Botão Sair
+        const botaoSair = document.createElement('button');
+        botaoSair.innerText = '🚪 Sair';
+        botaoSair.onclick = () => window.location.reload();
+        estilizarBotao(botaoSair);
+        botaoSair.style.backgroundColor = '#ff9999';
+        botaoSair.style.color = '#fff';
+
+        painel.appendChild(inputArquivo);
+        painel.appendChild(botaoUpload);
+        painel.appendChild(textarea);
+        painel.appendChild(botaoMensagem);
+        painel.appendChild(botaoSair);
+
+        container.appendChild(painel);
       } else {
         msg.innerText = "Senha Incorreta!";
         setTimeout(() => { msg.innerText = ""; }, 1500);
       }
     }
+
+    // Função para deixar os botões com estilo bonitinho
+    function estilizarBotao(botao) {
+      botao.style.padding = '12px 24px';
+      botao.style.margin = '10px';
+      botao.style.fontSize = '16px';
+      botao.style.borderRadius = '12px';
+      botao.style.border = 'none';
+      botao.style.cursor = 'pointer';
+      botao.style.backgroundColor = '#4e83f1';
+      botao.style.color = 'white';
+      botao.style.fontWeight = 'bold';
+      botao.style.boxShadow = '2px 2px 8px rgba(0, 0, 0, 0.2)';
+    }
+
 
   </script>
 </body>

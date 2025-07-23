@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login Professores</title>
+  <style>
+    /* Seu CSS permanece igual */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 110%;
+      font-family: Arial, sans-serif;
+      background: white;
+      overflow: hidden;
+    }
+    .container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      flex-direction: column;
+    }
+    .circle1 {
+      width: 280px;
+      height: 280px;
+      background: #c7bee7;
+      top: 20%;
+      left: 5%;
+    }
+    .circle1 button {
+      margin-top: 16Px;
+      padding: 22px;
+      background-color: white;
+      color: #c7bee7;
+      border: none;
+      border-radius: 18px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    .circle2 {
+      width: 220px;
+      height: 220px;
+      background: #9fd9b6;
+      top: 5%;
+      left: 30%;
+    }
+    .circle3 {
+      width: 300px;
+      height: 300px;
+      background: #f8deaa;
+      bottom: 8%;
+      right: 17%;
+    }
+    .circle3 button {
+      margin-top: 17px;
+      padding: 19px;
+      background-color: white;
+      color:  #f8deaa;
+      border: none;
+      border-radius: 18px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 22px;
+    }
+    .circle4 {
+      width: 330px;
+      height: 330px;
+      background: #e57c73;
+      top: 5%;
+      right: 5%;
+      color: white;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    .circle4 input {
+      margin: 12px 0;
+      padding: 12px;
+      border: none;
+      border-radius: 9px;
+      width: 80%;
+      font-size: 16px;
+    }
+    .circle4 button {
+      margin-top: 12px;
+      padding: 12px;
+      background-color: white;
+      color: #e57c73;
+      border: none;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .circle5 {
+      width: 260px;
+      height: 260px;
+      background: #a5bcdf;
+      bottom: 5%;
+      left: 20%;
+    }
+    .circle5 button {
+      margin-top: 17px;
+      padding: 19px;
+      background-color: white;
+      color: #a5bcdf;
+      border: none;
+      border-radius: 18px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 22px;
+    }
+    .logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 880px;
+      max-height: 680px;
+    }
+    #menu {
+      display: none;
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 20px;
+      background: #4caf50;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+    }
+    #menu.ativo {
+      display: block;
+    }
+    #mensagem {
+      color: yellow;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Círculos -->
+    <div class="circle circle1">
+      <form onsubmit="slides(); return false;">
+          <button id="btnSlides" type="submit">SLIDES</button>
+      </form>
+    </div>
+
+    <div class="circle circle2"></div>
+
+    <div class="circle circle3">
+      <form onsubmit="atividades(); return false;">
+          <button id="btnAtividades" type="submit">ATIVIDADES</button>
+          <a href="Imagens/Auxilio.pdf" target="_blank">Abrir Auxílio.pdf</a>
+      </form>
+    </div>
+
+    <div class="circle circle4" id="loginBox">
+      <form onsubmit="fazerLogin(); return false;">
+        <div><strong>Login Professores</strong></div>
+        <input type="password" id="senha" placeholder="Digite a senha" required />
+        <button type="submit">Entrar</button>
+        <div id="mensagem"></div>
+      </form>
+    </div>
+
+    <div class="circle circle5">
+      <form onsubmit="jogos(); return false;">
+          <button id="btnJogos" type="submit">Jogos</button>
+      </form>
+    </div>
+    <!-- Logo -->
+    <img src="logo.png" alt="Logo Saga" class="logo">
+
+    <!-- Menu oculto -->
+    <div id="menu">✅ Bem-vindo ao sistema, professor(a)!</div>
+  </div>
+
+  <script>
+    const senhaCorreta = "1234"; 
+  function slides() {
+    const container = document.querySelector('.container');
+
+    // Limpa os elementos anteriores
+    const elementos = container.querySelectorAll('.circle, .logo, #menu');
+    elementos.forEach(el => el.remove());
+
+    // Estilo de fundo roxo infantil
+    container.style.backgroundImage = 'linear-gradient(to bottom right, #d5a6ff, #b28dff)';
+    container.style.backgroundColor = '';
+    container.innerHTML = ''; // limpa tudo
+
+    // Cria a tela de slides
+    const slideArea = document.createElement('div');
+    slideArea.style.display = 'flex';
+    slideArea.style.flexDirection = 'column';
+    slideArea.style.alignItems = 'center';
+    slideArea.style.justifyContent = 'center';
+    slideArea.style.height = '100vh';
+    slideArea.style.color = '#fff';
+    slideArea.style.fontFamily = '"Comic Sans MS", cursive';
+    slideArea.style.padding = '20px';
+
+    slideArea.innerHTML = `
+      <h1 style="font-size: 2.5em; margin-bottom: 10px;">🎨 Bem-vindo aos Slides!</h1>
+      <p style="font-size: 1.5em; margin-bottom: 20px;">Vamos aprender !</p>
+    `;
+
+    const links = [
+      { texto: "Slides 1", url: "https://www.canva.com/design/DAGhRN4crEg/1BIWPRVSjBq-NaQnmXMiMQ/edit?utm_content=DAGhRN4crEg&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" },
+      { texto: "Slides 2", url: "https://www.canva.com/design/DAGhRSTBCS8/iThucr-FmqA0lzzz9qco_A/edit?utm_content=DAGhRSTBCS8&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" },
+      { texto: "Slides 3", url: "https://www.canva.com/design/DAGhRmgEeaQ/HOMA7Attr37x12RVR020ZA/edit?utm_content=DAGhRmgEeaQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" },
+      { texto: "Slides 4", url: "https://www.canva.com/design/DAGh6eaApP8/uUTZRkiB723GmE8IjIcvdw/edit?utm_content=DAGh6eaApP8&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" },
+      { texto: "Slides 5", url: "https://www.canva.com/design/DAGh6u6pygc/P-Wqh25ebHuDN0i8i2Fclw/edit?utm_content=DAGh6u6pygc&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" },
+      { texto: "Slides 6", url: "https://www.canva.com/design/DAGh6ixgQfI/7m1pZiNcSdotsWSOQ3HERw/edit?utm_content=DAGh6ixgQfI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" },
+    ];
+
+    links.forEach(link => {
+      const botao = document.createElement('button');
+      botao.innerText = link.texto;
+      botao.style.padding = '16px 32px';
+      botao.style.margin = '10px';
+      botao.style.fontSize = '18px';
+      botao.style.borderRadius = '12px';
+      botao.style.border = 'none';
+      botao.style.cursor = 'pointer';
+      botao.style.backgroundColor = '#ffffff';
+      botao.style.color = '#b28dff';
+      botao.style.fontWeight = 'bold';
+      botao.style.boxShadow = '2px 2px 8px rgba(0, 0, 0, 0.2)';
+      botao.onclick = () => window.open(link.url, '_blank');
+      slideArea.appendChild(botao);
+    });
+
+
+
+
+    // Botão voltar
+    const botaoVoltar = document.createElement('button');
+    botaoVoltar.innerText = " Voltar";
+    botaoVoltar.onclick = () => window.location.reload();
+    botaoVoltar.style.padding = '12px 24px';
+    botaoVoltar.style.fontSize = '1.2em';
+    botaoVoltar.style.backgroundColor = '#fff';
+    botaoVoltar.style.border = 'none';
+    botaoVoltar.style.borderRadius = '20px';
+    botaoVoltar.style.color = '#b28dff';
+    botaoVoltar.style.cursor = 'pointer';
+    botaoVoltar.style.marginTop = '20px';
+    botaoVoltar.style.boxShadow = '2px 2px 8px rgba(0, 0, 0, 0.2)';
+    slideArea.appendChild(botaoVoltar);
+
+    container.appendChild(slideArea);
+  }
+
+  function jogos() {
+    const container = document.querySelector('.container');
+
+    // Remove elementos antigos
+    const elementos = container.querySelectorAll('.circle, .logo, #menu');
+    elementos.forEach(el => el.remove());
+
+    // Fundo com cor do círculo verde claro
+    container.style.backgroundImage = 'linear-gradient(to bottom right, #c7e6d0, #9fd9b6)';
+    container.innerHTML = '';
+
+    const area = document.createElement('div');
+    area.style.display = 'flex';
+    area.style.flexDirection = 'column';
+    area.style.alignItems = 'center';
+    area.style.justifyContent = 'center';
+    area.style.height = '100vh';
+    area.style.color = '#3a5a40';
+    area.style.fontFamily = '"Comic Sans MS", cursive';
+    area.style.padding = '20px';
+
+    area.innerHTML = `
+      <h1 style="font-size: 2.5em; margin-bottom: 10px;">🎲 Jogos Divertidos!</h1>
+      <p style="font-size: 1.3em; margin-bottom: 20px;">Clique e se divirta aprendendo!</p>
+    `;
+
+    const links = [
+      { texto: "Jogo 1", url: "https://play.makeit.app?code=818931" },
+      { texto: "Jogo 2", url: "https://wordwall.net/play/88167/149/434" },
+      { texto: "Jogo 3", url: "https://wordwall.net/play/88169/398/378" },
+      { texto: "Jogo 4", url: "https://wordwall.net/play/88172/008/777" },
+      { texto: "Jogo 5", url: "https://wordwall.net/play/88183/189/685" },
+      { texto: "Jogo 6", url: "https://wordwall.net/play/88184/038/301" },
+      { texto: "Jogo 7", url: "https://wordwall.net/play/88184/779/946" }
+    ];
+
+    links.forEach(link => {
+      const botao = document.createElement('button');
+      botao.innerText = link.texto;
+      botao.style.padding = '16px 24px';
+      botao.style.fontSize = '18px';
+      botao.style.borderRadius = '10px';
+      botao.style.border = 'none';
+      botao.style.cursor = 'pointer';
+      botao.style.backgroundColor = 'white';
+      botao.style.color = '#9fd9b6';
+      botao.style.fontWeight = 'bold';
+      botao.style.marginBottom = '12px';
+      botao.onclick = () => window.open(link.url, '_blank');
+      area.appendChild(botao);
+    });
+
+    // Botão voltar
+    const botaoVoltar = document.createElement('button');
+    botaoVoltar.innerText = " Voltar";
+    botaoVoltar.onclick = () => window.location.reload();
+    botaoVoltar.style.padding = '15px 30px';
+    botaoVoltar.style.fontSize = '1.2em';
+    botaoVoltar.style.backgroundColor = '#9fd9b6';
+    botaoVoltar.style.color = '#3a5a40';
+    botaoVoltar.style.border = 'none';
+    botaoVoltar.style.borderRadius = '25px';
+    botaoVoltar.style.cursor = 'pointer';
+    botaoVoltar.style.marginTop = '30px';
+    area.appendChild(botaoVoltar);
+
+    container.appendChild(area);
+  }
+    function atividades() {
+      const container = document.querySelector('.container');
+
+      // Remove elementos anteriores
+      const elementos = container.querySelectorAll('.circle, .logo, #menu');
+      elementos.forEach(el => el.remove());
+
+      // Fundo com cor do círculo amarelo claro
+      container.style.backgroundImage = 'linear-gradient(to bottom right, #faf3d5, #f8deaa)';
+      container.innerHTML = '';
+
+      const area = document.createElement('div');
+      area.style.display = 'flex';
+      area.style.flexDirection = 'column';
+      area.style.alignItems = 'center';
+      area.style.justifyContent = 'center';
+      area.style.height = '100vh';
+      area.style.color = '#555';
+      area.style.fontFamily = '"Comic Sans MS", cursive';
+      area.style.padding = '20px';
+
+      area.innerHTML = `
+        <h1 style="font-size: 2.5em; margin-bottom: 10px;">✏️ Atividades Divertidas!</h1>
+        <p style="font-size: 1.3em; margin-bottom: 20px;">Clique para aprender !</p>
+      `;
+
+      const links = [
+        { texto: "Atividade 1 - Auxílio", url: "Imagens/Auxilio.pdf" },
+        { texto: "Atividade 2", url: "Imagens/Atividades.docx" }
+      ];
+
+      links.forEach(link => {
+        const botao = document.createElement('button');
+        botao.innerText = link.texto;
+        botao.style.padding = '18px 24px';
+        botao.style.fontSize = '18px';
+        botao.style.borderRadius = '12px';
+        botao.style.border = 'none';
+        botao.style.cursor = 'pointer';
+        botao.style.backgroundColor = 'white';
+        botao.style.color = '#f8deaa';
+        botao.style.fontWeight = 'bold';
+        botao.onclick = () => {
+          const a = document.createElement('a');
+          a.href = link.url;
+          a.download = ''; // Força o download
+          a.target = '_blank';
+          a.click();
+        };
+        area.appendChild(botao);
+    });
+      // Botão voltar
+      const botaoVoltar = document.createElement('button');
+      botaoVoltar.innerText = " Voltar";
+      botaoVoltar.onclick = () => window.location.reload();
+      botaoVoltar.style.padding = '15px 30px';
+      botaoVoltar.style.fontSize = '1.2em';
+      botaoVoltar.style.backgroundColor = '#f8deaa';
+      botaoVoltar.style.color = '#555';
+      botaoVoltar.style.border = 'none';
+      botaoVoltar.style.borderRadius = '25px';
+      botaoVoltar.style.cursor = 'pointer';
+      botaoVoltar.style.marginTop = '30px';
+      area.appendChild(botaoVoltar);
+
+      container.appendChild(area);
+    }
+
+    function fazerLogin() {
+      const senha = document.getElementById("senha").value;
+      const msg = document.getElementById("mensagem");
+
+      if (senha === senhaCorreta) {
+        const container = document.querySelector('.container');
+
+        // Remove todos os elementos da tela (círculos, logo e menu)
+        const elementos = container.querySelectorAll('.circle, .logo, #menu');
+        elementos.forEach(el => el.remove());
+
+        // Muda o fundo para cor lisa
+        container.style.backgroundImage = 'none';
+        container.style.backgroundColor = '#f0f0f0';
+      } else {
+        msg.innerText = "Senha Incorreta!";
+        setTimeout(() => { msg.innerText = ""; }, 1500);
+      }
+    }
+
+  </script>
+</body>
+</html>
